@@ -16,7 +16,7 @@ var validbase58 = require('./data/bitcoind/base58_keys_valid.json')
 var invalidbase58 = require('./data/bitcoind/base58_keys_invalid.json')
 
 describe('Address', function () {
-  var pubkeyhash = new Buffer('3c3fa3d4adcaf8f52d5b1843975e122548269937', 'hex')
+  var pubkeyhash = Buffer.from('3c3fa3d4adcaf8f52d5b1843975e122548269937', 'hex')
   var buf = Buffer.concat([new Buffer([28]), pubkeyhash])
   var str = 'bitcoincash:qq7rlg754h903afdtvvy8967zgj5sf5exueg36nyc7'
 

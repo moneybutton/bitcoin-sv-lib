@@ -324,7 +324,7 @@ describe('Script', function () {
     it('correctly identify scriptSig as a public key in', function () {
       // from txid: 5c85ed63469aa9971b5d01063dbb8bcdafd412b2f51a3d24abf2e310c028bbf8
       // and input index: 5
-      var scriptBuffer = new Buffer('483045022050eb59c79435c051f45003d9f82865c8e4df5699d7722e77113ef8cadbd92109022100d4ab233e070070eb8e0e62e3d2d2eb9474a5bf135c9eda32755acb0875a6c20601', 'hex')
+      var scriptBuffer = Buffer.from('483045022050eb59c79435c051f45003d9f82865c8e4df5699d7722e77113ef8cadbd92109022100d4ab233e070070eb8e0e62e3d2d2eb9474a5bf135c9eda32755acb0875a6c20601', 'hex')
       var script = bitcore.Script.fromBuffer(scriptBuffer)
       script.isPublicKeyIn().should.equal(true)
     })
@@ -651,7 +651,7 @@ describe('Script', function () {
     })
 
     it('should work for no data OP_RETURN', function () {
-      Script().add(Opcode.OP_RETURN).add(new Buffer('')).toString().should.equal('OP_RETURN')
+      Script().add(Opcode.OP_RETURN).add(Buffer.from('')).toString().should.equal('OP_RETURN')
     })
     it('works with objects', function () {
       Script().add({
@@ -767,14 +767,14 @@ describe('Script', function () {
       s.isDataOut().should.equal(true)
     })
     it('should create script from empty data', function () {
-      var data = new Buffer('')
+      var data = Buffer.from('')
       var s = Script.buildDataOut(data)
       should.exist(s)
       s.toString().should.equal('OP_RETURN')
       s.isDataOut().should.equal(true)
     })
     it('should create script from some data', function () {
-      var data = new Buffer('bacacafe0102030405', 'hex')
+      var data = Buffer.from('bacacafe0102030405', 'hex')
       var s = Script.buildDataOut(data)
       should.exist(s)
       s.toString().should.equal('OP_RETURN 9 0xbacacafe0102030405')
@@ -876,7 +876,7 @@ describe('Script', function () {
     it('works with this testnet transaction', function () {
       // testnet block: 00000000a36400fc06440512354515964bc36ecb0020bd0b0fd48ae201965f54
       // txhash: e362e21ff1d2ef78379d401d89b42ce3e0ce3e245f74b1f4cb624a8baa5d53ad (output 0);
-      var script = Script.fromBuffer(new Buffer('6a', 'hex'))
+      var script = Script.fromBuffer(Buffer.from('6a', 'hex'))
       var dataout = script.isDataOut()
       dataout.should.equal(true)
       var data = script.getData()
@@ -982,10 +982,10 @@ describe('Script', function () {
       Script('OP_TRUE OP_TRUE').equals(Script('OP_TRUE OP_FALSE')).should.equal(false)
     })
     it('returns false for different data', function () {
-      Script().add(new Buffer('a')).equals(Script('OP_TRUE')).should.equal(false)
+      Script().add(Buffer.from('a')).equals(Script('OP_TRUE')).should.equal(false)
     })
     it('returns false for different data', function () {
-      Script().add(new Buffer('a')).equals(Script().add(new Buffer('b'))).should.equal(false)
+      Script().add(Buffer.from('a')).equals(Script().add(Buffer.from('b'))).should.equal(false)
     })
   })
 

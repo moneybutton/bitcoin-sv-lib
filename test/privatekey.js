@@ -135,7 +135,7 @@ describe('PrivateKey', function () {
     it('should not be able to instantiate private key WIF because of unknown network byte', function () {
       expect(function () {
         var buf = Base58Check.decode('L3T1s1TYP9oyhHpXgkyLoJFGniEgkv2Jhi138d7R2yJ9F4QdDU2m')
-        var buf2 = Buffer.concat([new Buffer('ff', 'hex'), buf.slice(1, 33)])
+        var buf2 = Buffer.concat([Buffer.from('ff', 'hex'), buf.slice(1, 33)])
         return new PrivateKey(buf2)
       }).to.throw('Invalid network')
     })
@@ -326,7 +326,7 @@ describe('PrivateKey', function () {
     })
 
     it('will output a 31 byte buffer', function () {
-      var bn = BN.fromBuffer(new Buffer('9b5a0e8fee1835e21170ce1431f9b6f19b487e67748ed70d8a4462bc031915', 'hex'))
+      var bn = BN.fromBuffer(Buffer.from('9b5a0e8fee1835e21170ce1431f9b6f19b487e67748ed70d8a4462bc031915', 'hex'))
       var privkey = new PrivateKey(bn)
       var buffer = privkey.toBufferNoPadding()
       buffer.length.should.equal(31)
@@ -334,7 +334,7 @@ describe('PrivateKey', function () {
 
     // TODO: enable for v1.0.0 when toBuffer is changed to always be 32 bytes long
     // it('will output a 32 byte buffer', function() {
-    //   var bn = BN.fromBuffer(new Buffer('9b5a0e8fee1835e21170ce1431f9b6f19b487e67748ed70d8a4462bc031915', 'hex'));
+    //   var bn = BN.fromBuffer(Buffer.from('9b5a0e8fee1835e21170ce1431f9b6f19b487e67748ed70d8a4462bc031915', 'hex'));
     //   var privkey = new PrivateKey(bn);
     //   var buffer = privkey.toBuffer();
     //   buffer.length.should.equal(32);

@@ -73,7 +73,7 @@ describe('Signature', function () {
   })
 
   describe('#fromDER', function () {
-    var buf = new Buffer('3044022075fc517e541bd54769c080b64397e32161c850f6c1b2b67a5c433affbb3e62770220729e85cc46ffab881065ec07694220e71d4df9b2b8c8fd12c3122cf3a5efbcf2', 'hex')
+    var buf = Buffer.from('3044022075fc517e541bd54769c080b64397e32161c850f6c1b2b67a5c433affbb3e62770220729e85cc46ffab881065ec07694220e71d4df9b2b8c8fd12c3122cf3a5efbcf2', 'hex')
 
     it('should parse this DER format signature', function () {
       var sig = Signature.fromDER(buf)
@@ -87,7 +87,7 @@ describe('Signature', function () {
   })
 
   describe('#fromString', function () {
-    var buf = new Buffer('3044022075fc517e541bd54769c080b64397e32161c850f6c1b2b67a5c433affbb3e62770220729e85cc46ffab881065ec07694220e71d4df9b2b8c8fd12c3122cf3a5efbcf2', 'hex')
+    var buf = Buffer.from('3044022075fc517e541bd54769c080b64397e32161c850f6c1b2b67a5c433affbb3e62770220729e85cc46ffab881065ec07694220e71d4df9b2b8c8fd12c3122cf3a5efbcf2', 'hex')
 
     it('should parse this DER format signature in hex', function () {
       var sig = Signature.fromString(buf.toString('hex'))
@@ -119,7 +119,7 @@ describe('Signature', function () {
 
   describe('#fromTxFormat', function () {
     it('should convert from this known tx-format buffer', function () {
-      var buf = new Buffer('30450221008bab1f0a2ff2f9cb8992173d8ad73c229d31ea8e10b0f4d4ae1a0d8ed76021fa02200993a6ec81755b9111762fc2cf8e3ede73047515622792110867d12654275e7201', 'hex')
+      var buf = Buffer.from('30450221008bab1f0a2ff2f9cb8992173d8ad73c229d31ea8e10b0f4d4ae1a0d8ed76021fa02200993a6ec81755b9111762fc2cf8e3ede73047515622792110867d12654275e7201', 'hex')
       var sig = Signature.fromTxFormat(buf)
       sig.r.toString().should.equal('63173831029936981022572627018246571655303050627048489594159321588908385378810')
       sig.s.toString().should.equal('4331694221846364448463828256391194279133231453999942381442030409253074198130')

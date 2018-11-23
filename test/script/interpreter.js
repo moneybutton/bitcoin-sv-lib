@@ -75,7 +75,7 @@ describe('Interpreter', function () {
       Interpreter.castToBool(new BN(0).toSM({
         endian: 'little'
       })).should.equal(false)
-      Interpreter.castToBool(new Buffer('0080', 'hex')).should.equal(false) // negative 0
+      Interpreter.castToBool(Buffer.from('0080', 'hex')).should.equal(false) // negative 0
       Interpreter.castToBool(new BN(1).toSM({
         endian: 'little'
       })).should.equal(true)
@@ -83,7 +83,7 @@ describe('Interpreter', function () {
         endian: 'little'
       })).should.equal(true)
 
-      var buf = new Buffer('00', 'hex')
+      var buf = Buffer.from('00', 'hex')
       var bool = BN.fromSM(buf, {
         endian: 'little'
       }).cmp(BN.Zero) !== 0

@@ -12,12 +12,12 @@ describe('buffer utils', function () {
   describe('equals', function () {
     it('recognizes these two equal buffers', function () {
       var bufferA = new Buffer([1, 2, 3])
-      var bufferB = new Buffer('010203', 'hex')
+      var bufferB = Buffer.from('010203', 'hex')
       BufferUtil.equal(bufferA, bufferB).should.equal(true)
     })
     it('no false positive: returns false with two different buffers', function () {
       var bufferA = new Buffer([1, 2, 3])
-      var bufferB = new Buffer('010204', 'hex')
+      var bufferB = Buffer.from('010204', 'hex')
       BufferUtil.equal(bufferA, bufferB).should.equal(false)
     })
     it('coverage: quickly realizes a difference in size and returns false', function () {
