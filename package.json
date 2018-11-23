@@ -49,5 +49,15 @@
     "phantomjs-prebuilt": "^2.1.16",
     "sinon": "^1.13.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "standard": {
+    "globals": [
+      "afterEach",
+      "beforeEach",
+      "describe",
+      "it",
+      "expect",
+      "should"
+    ]
+  }
 }
