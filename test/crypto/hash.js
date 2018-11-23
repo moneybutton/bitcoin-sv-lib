@@ -5,14 +5,14 @@ var bitcore = require('../..')
 var Hash = bitcore.crypto.Hash
 
 describe('Hash', function () {
-  var buf = new Buffer([0, 1, 2, 3, 253, 254, 255])
+  var buf = Buffer.from([0, 1, 2, 3, 253, 254, 255])
   var str = 'test string'
 
   describe('@sha1', function () {
     it('calculates the hash of this buffer correctly', function () {
       var hash = Hash.sha1(buf)
       hash.toString('hex').should.equal('de69b8a4a5604d0486e6420db81e39eb464a17b2')
-      hash = Hash.sha1(new Buffer(0))
+      hash = Hash.sha1(Buffer.alloc(0))
       hash.toString('hex').should.equal('da39a3ee5e6b4b0d3255bfef95601890afd80709')
     })
 
@@ -108,7 +108,7 @@ describe('Hash', function () {
     it('calculates this known empty test vector correctly', function () {
       var hex = 'b936cee86c9f87aa5d3c6f2e84cb5a4239a5fe50480a6ec66b70ab5b1f4a' +
         'c6730c6c515421b327ec1d69402e53dfb49ad7381eb067b338fd7b0cb22247225d47'
-      Hash.sha512hmac(new Buffer([]), new Buffer([])).toString('hex').should.equal(hex)
+      Hash.sha512hmac(Buffer.from([]), Buffer.from([])).toString('hex').should.equal(hex)
     })
 
     it('calculates this known non-empty test vector correctly', function () {

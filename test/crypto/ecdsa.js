@@ -203,7 +203,7 @@ describe('ECDSA', function () {
 
     it('should generate right K', function () {
       var msg1 = Buffer.from('52204d20fd0131ae1afd173fd80a3a746d2dcc0cddced8c9dc3d61cc7ab6e966', 'hex')
-      var msg2 = [].reverse.call(new Buffer(msg1))
+      var msg2 = [].reverse.call(Buffer.from(msg1))
       var pk = Buffer.from('16f243e962c59e71e54189e67e66cf2440a1334514c09c00ddcc21632bac9808', 'hex')
       var signature1 = ECDSA.sign(msg1, Privkey.fromBuffer(pk)).toBuffer().toString('hex')
       var signature2 = ECDSA.sign(msg2, Privkey.fromBuffer(pk), 'little').toBuffer().toString('hex')
@@ -263,9 +263,9 @@ describe('ECDSA', function () {
       vectors.valid.forEach(function (obj, i) {
         it('should validate valid vector ' + i, function () {
           var ecdsa = ECDSA().set({
-            privkey: new Privkey(BN.fromBuffer(new Buffer(obj.d, 'hex'))),
-            k: BN.fromBuffer(new Buffer(obj.k, 'hex')),
-            hashbuf: Hash.sha256(new Buffer(obj.message)),
+            privkey: new Privkey(BN.fromBuffer(Buffer.from(obj.d, 'hex'))),
+            k: BN.fromBuffer(Buffer.from(obj.k, 'hex')),
+            hashbuf: Hash.sha256(Buffer.from(obj.message)),
             sig: new Signature().set({
               r: new BN(obj.signature.r),
               s: new BN(obj.signature.s),
@@ -288,7 +288,7 @@ describe('ECDSA', function () {
           var ecdsa = ECDSA().set({
             pubkey: Pubkey.fromPoint(point.fromX(true, 1)),
             sig: new Signature(new BN(obj.signature.r), new BN(obj.signature.s)),
-            hashbuf: Hash.sha256(new Buffer(obj.message))
+            hashbuf: Hash.sha256(Buffer.from(obj.message))
           })
           ecdsa.sigError().should.equal(obj.exception)
         })
@@ -296,8 +296,8 @@ describe('ECDSA', function () {
 
       vectors.deterministicK.forEach(function (obj, i) {
         it('should validate deterministicK vector ' + i, function () {
-          var hashbuf = Hash.sha256(new Buffer(obj.message))
-          var privkey = Privkey(BN.fromBuffer(new Buffer(obj.privkey, 'hex')), 'mainnet')
+          var hashbuf = Hash.sha256(Buffer.from(obj.message))
+          var privkey = Privkey(BN.fromBuffer(Buffer.from(obj.privkey, 'hex')), 'mainnet')
           var ecdsa = ECDSA({
             privkey: privkey,
             hashbuf: hashbuf

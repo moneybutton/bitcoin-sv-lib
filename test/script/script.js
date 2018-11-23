@@ -47,7 +47,7 @@ describe('Script', function () {
 
   describe('#fromBuffer', function () {
     it('should parse this buffer containing an OP code', function () {
-      var buf = new Buffer(1)
+      var buf = Buffer.from(1)
       buf[0] = Opcode.OP_0
       var script = Script.fromBuffer(buf)
       script.chunks.length.should.equal(1)
@@ -55,7 +55,7 @@ describe('Script', function () {
     })
 
     it('should parse this buffer containing another OP code', function () {
-      var buf = new Buffer(1)
+      var buf = Buffer.from(1)
       buf[0] = Opcode.OP_CHECKMULTISIG
       var script = Script.fromBuffer(buf)
       script.chunks.length.should.equal(1)
@@ -63,14 +63,14 @@ describe('Script', function () {
     })
 
     it('should parse this buffer containing three bytes of data', function () {
-      var buf = new Buffer([3, 1, 2, 3])
+      var buf = Buffer.from([3, 1, 2, 3])
       var script = Script.fromBuffer(buf)
       script.chunks.length.should.equal(1)
       script.chunks[0].buf.toString('hex').should.equal('010203')
     })
 
     it('should parse this buffer containing OP_PUSHDATA1 and three bytes of data', function () {
-      var buf = new Buffer([0, 0, 1, 2, 3])
+      var buf = Buffer.from([0, 0, 1, 2, 3])
       buf[0] = Opcode.OP_PUSHDATA1
       buf.writeUInt8(3, 1)
       var script = Script.fromBuffer(buf)
@@ -79,7 +79,7 @@ describe('Script', function () {
     })
 
     it('should parse this buffer containing OP_PUSHDATA2 and three bytes of data', function () {
-      var buf = new Buffer([0, 0, 0, 1, 2, 3])
+      var buf = Buffer.from([0, 0, 0, 1, 2, 3])
       buf[0] = Opcode.OP_PUSHDATA2
       buf.writeUInt16LE(3, 1)
       var script = Script.fromBuffer(buf)
@@ -88,7 +88,7 @@ describe('Script', function () {
     })
 
     it('should parse this buffer containing OP_PUSHDATA4 and three bytes of data', function () {
-      var buf = new Buffer([0, 0, 0, 0, 0, 1, 2, 3])
+      var buf = Buffer.from([0, 0, 0, 0, 0, 1, 2, 3])
       buf[0] = Opcode.OP_PUSHDATA4
       buf.writeUInt16LE(3, 1)
       var script = Script.fromBuffer(buf)
@@ -97,7 +97,7 @@ describe('Script', function () {
     })
 
     it('should parse this buffer an OP code, data, and another OP code', function () {
-      var buf = new Buffer([0, 0, 0, 0, 0, 0, 1, 2, 3, 0])
+      var buf = Buffer.from([0, 0, 0, 0, 0, 0, 1, 2, 3, 0])
       buf[0] = Opcode.OP_0
       buf[1] = Opcode.OP_PUSHDATA4
       buf.writeUInt16LE(3, 2)
@@ -112,7 +112,7 @@ describe('Script', function () {
 
   describe('#toBuffer', function () {
     it('should output this buffer containing an OP code', function () {
-      var buf = new Buffer(1)
+      var buf = Buffer.from(1)
       buf[0] = Opcode.OP_0
       var script = Script.fromBuffer(buf)
       script.chunks.length.should.equal(1)
@@ -121,7 +121,7 @@ describe('Script', function () {
     })
 
     it('should output this buffer containing another OP code', function () {
-      var buf = new Buffer(1)
+      var buf = Buffer.from(1)
       buf[0] = Opcode.OP_CHECKMULTISIG
       var script = Script.fromBuffer(buf)
       script.chunks.length.should.equal(1)
@@ -130,7 +130,7 @@ describe('Script', function () {
     })
 
     it('should output this buffer containing three bytes of data', function () {
-      var buf = new Buffer([3, 1, 2, 3])
+      var buf = Buffer.from([3, 1, 2, 3])
       var script = Script.fromBuffer(buf)
       script.chunks.length.should.equal(1)
       script.chunks[0].buf.toString('hex').should.equal('010203')
@@ -138,7 +138,7 @@ describe('Script', function () {
     })
 
     it('should output this buffer containing OP_PUSHDATA1 and three bytes of data', function () {
-      var buf = new Buffer([0, 0, 1, 2, 3])
+      var buf = Buffer.from([0, 0, 1, 2, 3])
       buf[0] = Opcode.OP_PUSHDATA1
       buf.writeUInt8(3, 1)
       var script = Script.fromBuffer(buf)
@@ -148,7 +148,7 @@ describe('Script', function () {
     })
 
     it('should output this buffer containing OP_PUSHDATA2 and three bytes of data', function () {
-      var buf = new Buffer([0, 0, 0, 1, 2, 3])
+      var buf = Buffer.from([0, 0, 0, 1, 2, 3])
       buf[0] = Opcode.OP_PUSHDATA2
       buf.writeUInt16LE(3, 1)
       var script = Script.fromBuffer(buf)
@@ -158,7 +158,7 @@ describe('Script', function () {
     })
 
     it('should output this buffer containing OP_PUSHDATA4 and three bytes of data', function () {
-      var buf = new Buffer([0, 0, 0, 0, 0, 1, 2, 3])
+      var buf = Buffer.from([0, 0, 0, 0, 0, 1, 2, 3])
       buf[0] = Opcode.OP_PUSHDATA4
       buf.writeUInt16LE(3, 1)
       var script = Script.fromBuffer(buf)
@@ -168,7 +168,7 @@ describe('Script', function () {
     })
 
     it('should output this buffer an OP code, data, and another OP code', function () {
-      var buf = new Buffer([0, 0, 0, 0, 0, 0, 1, 2, 3, 0])
+      var buf = Buffer.from([0, 0, 0, 0, 0, 0, 1, 2, 3, 0])
       buf[0] = Opcode.OP_0
       buf[1] = Opcode.OP_PUSHDATA4
       buf.writeUInt16LE(3, 2)
@@ -241,7 +241,7 @@ describe('Script', function () {
     })
 
     it('should output this buffer an OP code, data, and another OP code', function () {
-      var buf = new Buffer([0, 0, 0, 0, 0, 0, 1, 2, 3, 0])
+      var buf = Buffer.from([0, 0, 0, 0, 0, 0, 1, 2, 3, 0])
       buf[0] = Opcode.OP_0
       buf[1] = Opcode.OP_PUSHDATA4
       buf.writeUInt16LE(3, 2)
@@ -274,7 +274,7 @@ describe('Script', function () {
 
   describe('toHex', function () {
     it('should return an hexa string "03010203" as expected from [3, 1, 2, 3]', function () {
-      var buf = new Buffer([3, 1, 2, 3])
+      var buf = Buffer.from([3, 1, 2, 3])
       var script = Script.fromBuffer(buf)
       script.toHex().should.equal('03010203')
     })
@@ -290,31 +290,31 @@ describe('Script', function () {
     })
 
     it('validates that this 40-byte OP_RETURN is standard', function () {
-      var buf = new Buffer(40)
+      var buf = Buffer.from(40)
       buf.fill(0)
       Script('OP_RETURN 40 0x' + buf.toString('hex')).isDataOut().should.equal(true)
     })
 
     it('validates that this 80-byte OP_RETURN is standard', function () {
-      var buf = new Buffer(80)
+      var buf = Buffer.from(80)
       buf.fill(0)
       Script('OP_RETURN OP_PUSHDATA1 80 0x' + buf.toString('hex')).isDataOut().should.equal(true)
     })
 
     it('validates that this 220-byte OP_RETURN is standard', function () {
-      var buf = new Buffer(220)
+      var buf = Buffer.from(220)
       buf.fill(0)
       Script('OP_RETURN OP_PUSHDATA1 220 0x' + buf.toString('hex')).isDataOut().should.equal(true)
     })
 
     it('validates that this 40-byte long OP_CHECKMULTISIG is not standard op_return', function () {
-      var buf = new Buffer(40)
+      var buf = Buffer.from(40)
       buf.fill(0)
       Script('OP_CHECKMULTISIG 40 0x' + buf.toString('hex')).isDataOut().should.equal(false)
     })
 
     it('validates that this 221-byte OP_RETURN is not a valid standard OP_RETURN', function () {
-      var buf = new Buffer(221)
+      var buf = Buffer.from(221)
       buf.fill(0)
       Script('OP_RETURN OP_PUSHDATA1 221 0x' + buf.toString('hex')).isDataOut().should.equal(false)
     })
@@ -628,16 +628,16 @@ describe('Script', function () {
     })
 
     it('should add these push data', function () {
-      var buf = new Buffer(1)
+      var buf = Buffer.from(1)
       buf.fill(0)
       Script().add(buf).toString().should.equal('1 0x00')
-      buf = new Buffer(255)
+      buf = Buffer.from(255)
       buf.fill(0)
       Script().add(buf).toString().should.equal('OP_PUSHDATA1 255 0x' + buf.toString('hex'))
-      buf = new Buffer(256)
+      buf = Buffer.from(256)
       buf.fill(0)
       Script().add(buf).toString().should.equal('OP_PUSHDATA2 256 0x' + buf.toString('hex'))
-      buf = new Buffer(Math.pow(2, 16))
+      buf = Buffer.from(Math.pow(2, 16))
       buf.fill(0)
       Script().add(buf).toString().should.equal('OP_PUSHDATA4 ' + Math.pow(2, 16) + ' 0x' + buf.toString('hex'))
     })
@@ -645,7 +645,7 @@ describe('Script', function () {
     it('should add both pushdata and non-pushdata chunks', function () {
       Script().add('OP_CHECKMULTISIG').toString().should.equal('OP_CHECKMULTISIG')
       Script().add(Opcode.map.OP_CHECKMULTISIG).toString().should.equal('OP_CHECKMULTISIG')
-      var buf = new Buffer(1)
+      var buf = Buffer.from(1)
       buf.fill(0)
       Script().add(buf).toString().should.equal('1 0x00')
     })
@@ -856,17 +856,17 @@ describe('Script', function () {
       Script().add(1000).checkMinimalPush(0).should.equal(true)
       Script().add(0xffffffff).checkMinimalPush(0).should.equal(true)
       Script().add(0xffffffffffffffff).checkMinimalPush(0).should.equal(true)
-      Script().add(new Buffer([0])).checkMinimalPush(0).should.equal(true)
+      Script().add(Buffer.from([0])).checkMinimalPush(0).should.equal(true)
 
-      var buf = new Buffer(75)
+      var buf = Buffer.from(75)
       buf.fill(1)
       Script().add(buf).checkMinimalPush(0).should.equal(true)
 
-      buf = new Buffer(76)
+      buf = Buffer.from(76)
       buf.fill(1)
       Script().add(buf).checkMinimalPush(0).should.equal(true)
 
-      buf = new Buffer(256)
+      buf = Buffer.from(256)
       buf.fill(1)
       Script().add(buf).checkMinimalPush(0).should.equal(true)
     })
@@ -880,7 +880,7 @@ describe('Script', function () {
       var dataout = script.isDataOut()
       dataout.should.equal(true)
       var data = script.getData()
-      data.should.deep.equal(new Buffer(0))
+      data.should.deep.equal(Buffer.from(0))
     })
     it('for a P2PKH address', function () {
       var address = Address.fromString('Ce3M4ysH6XH7RMK1RYu4wLujcC7sv4EhNU')
@@ -893,7 +893,7 @@ describe('Script', function () {
       expect(BufferUtil.equal(script.getData(), address.hashBuffer)).to.be.true()
     })
     it('for a standard opreturn output', function () {
-      expect(BufferUtil.equal(Script('OP_RETURN 1 0xFF').getData(), new Buffer([255]))).to.be.true()
+      expect(BufferUtil.equal(Script('OP_RETURN 1 0xFF').getData(), Buffer.from([255]))).to.be.true()
     })
     it('fails if content is not recognized', function () {
       expect(function () {

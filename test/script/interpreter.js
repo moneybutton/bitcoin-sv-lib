@@ -30,10 +30,10 @@ Script.fromBitcoindString = function (str) {
     var tbuf
     if (token[0] === '0' && token[1] === 'x') {
       var hex = token.slice(2)
-      bw.write(new Buffer(hex, 'hex'))
+      bw.write(Buffer.from(hex, 'hex'))
     } else if (token[0] === '\'') {
       var tstr = token.slice(1, token.length - 1)
-      var cbuf = new Buffer(tstr)
+      var cbuf = Buffer.from(tstr)
       tbuf = Script().add(cbuf).toBuffer()
       bw.write(tbuf)
     } else if (typeof Opcode['OP_' + token] !== 'undefined') {
@@ -220,7 +220,7 @@ describe('Interpreter', function () {
       inputAmount = extraData[0] * 1e8
     }
 
-    var hashbuf = new Buffer(32)
+    var hashbuf = Buffer.alloc(32)
     hashbuf.fill(0)
     var credtx = new Transaction()
     credtx.uncheckedAddInput(new Transaction.Input({
