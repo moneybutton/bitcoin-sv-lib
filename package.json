@@ -1,8 +1,8 @@
 {
-  "name": "bitcore-lib-cash",
-  "version": "0.18.1",
-  "description": "A pure and powerful JavaScript Bitcoin Cash library.",
-  "author": "BitPay <dev@bitpay.com>",
+  "name": "bitcoin-sv-lib",
+  "version": "0.1.0",
+  "description": "A pure and powerful JavaScript Bitcoin SV library.",
+  "author": "Ryan X. Charles <ryan@moneybutton.com>",
   "main": "index.js",
   "scripts": {
     "lint": "gulp lint",
@@ -28,7 +28,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bitpay/bitcore-lib/tree/cash"
+    "url": "https://github.com/moneybutton/bitcoin-sv-lib/tree/cash"
   },
   "browser": {
     "request": "browser-request"
